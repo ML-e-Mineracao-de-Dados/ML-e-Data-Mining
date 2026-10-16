@@ -1,0 +1,4 @@
+Como os dados foram tratados:
+
+Os 207 valores ausentes de total_bedrooms (cerca de 1% das linhas) foram imputados pela mediana calculada apenas no treino, sem apagar nenhum registro.
+A coluna categórica ocean_proximity foi removida (tratada à parte na classificação) e os atributos numéricos foram padronizados; o alvo não foi alterado, mantendo-se o teto de 500.001.
