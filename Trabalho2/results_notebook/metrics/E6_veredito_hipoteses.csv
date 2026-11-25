@@ -1,0 +1,11 @@
+Hipótese,Dataset,Evidência,Resultado
+H1,Breast Cancer Wisconsin,F1 RL 100% = 0.985,confirmada
+H2,Breast Cancer Wisconsin,5%: Label Spreading (Semi) − Regressão Logística (Baseline) = +0.0104 (vence 4/5; p = 0.1250); 10%: Self-Training LR (Semi) − Regressão Logística (Baseline) = -0.0033 (vence 1/5; p = 0.5000),5%: inconclusiva; 10%: refutada
+H3,Breast Cancer Wisconsin,"ΔF1 (melhor semi − melhor baseline): 5% = +0.0104, 70% = +0.0000",confirmada
+H2,Wine,5%: Self-Training (LogReg) − Reg. Logistica (Baseline) = +0.0502 (vence 8/10; p = 0.0078); 10%: Self-Training (LogReg) − Reg. Logistica (Baseline) = +0.0461 (vence 9/10; p = 0.0039),confirmada
+H3,Wine,"ΔF1 (melhor semi − melhor baseline): 5% = +0.0502, 70% = +0.0046",confirmada
+H4,ambos,"ARI K-Médias: Wine = 0.908, Breast Cancer = 0.672",confirmada
+H5,Breast Cancer Wisconsin,"ARI: DBSCAN = 0.025, K-Médias = 0.672",confirmada
+H6,Breast Cancer Wisconsin,"F1 KNN (CV): completo = 0.962, PCA 2D = 0.932 (96.9%)",confirmada
+H5,Wine,"ARI: DBSCAN = 0.602, K-Médias = 0.908",confirmada
+H6,Wine,"F1 KNN (CV): completo = 0.963, PCA 2D = 0.978 (101.6%)",confirmada

@@ -1,0 +1,11 @@
+\chapter[Considerações Finais]{CONSIDERAÇÕES FINAIS}
+
+Este trabalho aplicou as sete etapas do processo KDD a duas bases com atributos contínuos e rótulos discretos, o Breast Cancer Wisconsin e o Wine, percorrendo todo o espectro de supervisão: do agrupamento sem rótulos, com K-Médias e DBSCAN, à classificação semi-supervisionada com 5\% a 70\% de rótulos, comparada com o KNN e a Regressão Logística.
+
+As etapas de pré-processamento e transformação mostraram que a padronização é indispensável para os métodos baseados em distância, que os \textit{outliers} do Breast Cancer carregam informação diagnóstica e devem ser mantidos, e que duas componentes principais preservam a maior parte da separabilidade das classes nas duas bases.
+
+Na mineração, o K-Médias recuperou quase perfeitamente as cultivares do Wine e de forma moderada os diagnósticos do Breast Cancer, enquanto o DBSCAN foi prejudicado pela ausência de regiões de baixa densidade entre as classes. Na classificação semi-supervisionada, o \textit{Self-Training} com Regressão Logística foi o melhor método em média nas duas bases. No Wine, com apenas 7 amostras rotuladas, atingiu F1-macro de 0,980 e superou a Regressão Logística de forma estatisticamente significativa. No Breast Cancer, cuja fronteira de decisão é essencialmente linear, os ganhos sobre a Regressão Logística não foram estatisticamente sustentados.
+
+A principal lição do trabalho é que \textbf{o valor dos dados não rotulados depende da estrutura das classes}, e que essa estrutura pode ser diagnosticada antecipadamente pelo desempenho do agrupamento. Também ficou evidente a natureza iterativa do KDD: a interpretação dos resultados levou à revisão das hipóteses iniciais e à identificação de melhorias para uma próxima iteração, como aumentar o número de repetições, ajustar os hiperparâmetros dos métodos de grafo com validação cruzada e calibrar o limiar de decisão para reduzir falsos negativos no contexto diagnóstico.
+
+Os códigos, o \textit{notebook} e todas as figuras e métricas geradas estão disponíveis no repositório do grupo, permitindo a reprodução integral dos experimentos.

@@ -1,0 +1,60 @@
+\documentclass[
+    oldfontcommands,
+    sumario=abnt-6027-2012,
+    12pt,
+    openright,
+    oneside,
+    a4paper,
+    chapter=TITLE,
+    section=TITLE,
+    english,
+    brazil
+]{abntex2mod}
+
+% Pacotes e configurações
+\input{pacotes}
+\input{configglobal}
+
+% Caminho das figuras de resultados
+\graphicspath{{./}{figuras/}}
+
+\begin{document}
+
+\selectlanguage{brazil}
+\frenchspacing
+% =========================
+% ELEMENTOS PRÉ-TEXTUAIS
+% =========================
+
+\pretextual
+
+\include{capa}
+\include{resumo}
+
+\pdfbookmark[0]{\contentsname}{toc}
+\renewcommand*\contentsname{SUMÁRIO}
+\tableofcontents*
+\cleardoublepage
+
+% =========================
+% ELEMENTOS TEXTUAIS
+% =========================
+
+\textual
+
+\include{introducao}
+\include{fundamentacao}
+\include{metodologia}
+\include{resultados}
+\include{discussao}
+\include{conclusao}
+
+% =========================
+% ELEMENTOS PÓS-TEXTUAIS
+% =========================
+
+\postextual
+
+\bibliography{referencias}
+
+\end{document}

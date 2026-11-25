@@ -1,0 +1,62 @@
+% Pacotes básicos
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lastpage}
+\usepackage{indentfirst}
+\usepackage{color,xcolor}
+\usepackage{graphicx}
+\usepackage{microtype}
+
+% Glossário
+\usepackage[subentrycounter,seeautonumberlist,nonumberlist=true]{glossaries}
+
+% Citações e referências (ABNT, sistema numérico)
+\usepackage[num,
+	    abnt-repeated-author-omit=no,
+	    abnt-url-package=url,
+	    abnt-etal-list=0,
+	    abnt-etal-text=emph,
+	    abnt-thesis-year=both,
+	    ]{abntex2cite}
+\usepackage{lipsum}
+\citebrackets()
+
+% Matemática, tabelas, figuras e referências cruzadas
+\usepackage[portuguese,onelanguage]{algorithm2e}
+\usepackage{amsbsy}
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{dsfont}
+\usepackage{listings}
+\usepackage{mathabx}
+\usepackage{pdfpages}
+\usepackage[font=default]{caption}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{anyfontsize}
+
+% Hiperlinks
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{xcolor}
+\newcommand{\link}[1]{{\color{blue}\href{#1}{#1}}}
+
+% O memoir já define framed, shaded etc., e o xwatermark tenta redefini-los
+\let\framed\undefined
+\let\endframed\undefined
+\let\shaded\undefined
+\let\endshaded\undefined
+\let\leftbar\undefined
+\let\endleftbar\undefined
+\let\snugshade\undefined
+\let\endsnugshade\undefined
+
+% Marca d'água da capa
+\usepackage[printwatermark]{xwatermark}
+\usepackage{transparent}
+\newwatermark[pages=1,xpos=60pt,ypos=-180pt]{\transparent{0.2}\includegraphics[width=.9\textwidth]{src/unesplogo.jpg}}

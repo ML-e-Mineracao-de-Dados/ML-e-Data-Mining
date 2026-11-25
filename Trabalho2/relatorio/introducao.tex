@@ -1,0 +1,36 @@
+\chapter[Introdução]{INTRODUÇÃO}
+
+\section{CONTEXTO DO TRABALHO}
+
+A mineração de dados (\textit{Data Mining}) corresponde, em geral, a uma etapa de um processo mais amplo de descoberta de conhecimento em bases de dados (\textit{Knowledge Discovery in Databases}, KDD), na qual os padrões presentes em um conjunto de dados são identificados e enumerados \citep{fayyad1996kdd}. O processo completo vai da compreensão do problema e da formulação de hipóteses até a interpretação dos resultados e o seu uso prático, e está próximo de outras metodologias consolidadas, como o CRISP-DM e o SEMMA \citep{azevedo2008kdd}.
+
+Neste trabalho, as sete etapas do processo KDD propostas na disciplina de Mineração de Dados e Aprendizado de Máquina foram aplicadas a dois conjuntos de dados com \textbf{atributos contínuos e rótulos discretos}: o \textit{Breast Cancer Wisconsin (Diagnostic)} e o \textit{Wine}. Conforme a proposta do trabalho, foram descartados problemas que pudessem ser resolvidos com Regressão Linear ou Árvores de Decisão, e a investigação se concentrou em duas famílias de algoritmos:
+
+\begin{itemize}
+    \item \textbf{Classificação semi-supervisionada}, variando a taxa de pontos rotulados de 0,05 a 0,70, com o KNN (\textit{k-Nearest Neighbors}) e a Regressão Logística como \textit{baselines} de comparação;
+    \item \textbf{Agrupamento}, com os algoritmos K-Médias e DBSCAN, vistos como o caso-limite em que nenhum ponto é rotulado.
+\end{itemize}
+
+\section{MOTIVAÇÃO}
+
+Na maioria dos países, o câncer de mama é o tipo de câncer predominante entre as mulheres, e a probabilidade de cura é tanto maior quanto mais cedo a doença é detectada. Diversas abordagens estatísticas foram desenvolvidas para auxiliar essa detecção a partir de exames citopatológicos \citep{street1993nuclear, machinemantra_breast}. Nesse contexto, cada rótulo (benigno ou maligno) depende do laudo de um patologista, o que torna os dados rotulados caros. Esse é um cenário natural para o aprendizado com poucos rótulos.
+
+Na vitivinicultura, garantir a autenticidade dos vinhos é um desafio: quanto mais precisa for a identificação da uva utilizada, maior é a garantia de qualidade e o controle contra fraudes. A classificação de vinhos a partir de sua composição química é um problema clássico de ciência de dados \citep{girardi2025xwines, siddhardhan_wine}. Também aqui a rotulagem depende de análise especializada, e o aproveitamento de amostras não rotuladas pode reduzir o seu custo.
+
+\section{OBJETIVOS}
+
+O objetivo geral deste trabalho é medir quanto conhecimento sobre as classes pode ser extraído com supervisão parcial, desde \textbf{nenhum rótulo} (agrupamento) até \textbf{70\% de rótulos} (classificação semi-supervisionada), comparando os resultados com \textit{baselines} supervisionados que utilizam apenas os pontos rotulados.
+
+Os objetivos específicos são:
+
+\begin{itemize}
+    \item Formular hipóteses verificáveis, com critérios objetivos, sobre a estrutura dos dois conjuntos de dados (Etapa 1);
+    \item Selecionar, pré-processar e transformar os dados, justificando cada decisão (padronização, tratamento de \textit{outliers} e redução de dimensionalidade) com evidências empíricas (Etapas 2 a 4);
+    \item Aplicar K-Médias e DBSCAN ao conjunto sem rótulos e avaliar a concordância dos agrupamentos com as classes reais (Etapa 5);
+    \item Aplicar os métodos semi-supervisionados \textit{Self-Training}, \textit{Label Spreading} e \textit{Label Propagation} com taxas de rotulagem de 5\% a 70\%, comparando-os com o KNN e a Regressão Logística por meio de testes estatísticos pareados (Etapa 5);
+    \item Interpretar os resultados, revisar as hipóteses iniciais e sintetizar o que os modelos revelam sobre os dados (Etapa 6), com recomendações práticas de uso (Etapa 7).
+\end{itemize}
+
+\section{ORGANIZAÇÃO DO RELATÓRIO}
+
+O Capítulo 2 apresenta a fundamentação teórica do processo KDD e dos algoritmos utilizados. O Capítulo 3 descreve os materiais e métodos, que correspondem às Etapas 1 a 4 do KDD e ao protocolo experimental. O Capítulo 4 apresenta os resultados da mineração (Etapa 5). O Capítulo 5 reúne a avaliação e a interpretação dos resultados (Etapa 6) e o pós-processamento (Etapa 7). Por fim, o Capítulo 6 traz as considerações finais.

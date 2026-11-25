@@ -21,6 +21,9 @@ from sklearn.metrics import (
     ConfusionMatrixDisplay,
 )
 
+# Pasta onde o script esta salvo: as saidas ficam em results_<dataset>/ ao lado dele
+PASTA_BASE = os.path.dirname(os.path.abspath(__file__))
+
 
 # Encapsula todas as etapas do fluxo KDD para reutilizacao entre diferentes datasets
 def executar_pipeline_kdd(
@@ -44,8 +47,8 @@ def executar_pipeline_kdd(
         "legend.fontsize": 11,
     })
 
-    # Prepara o diretorio de saida das figuras para manter a raiz do projeto organizada
-    pasta_figuras = os.path.join(f"results_{nome_dataset}", "figures")
+    # Prepara o diretorio de saida das figuras relativo a localizacao do script (independe da pasta de execucao)
+    pasta_figuras = os.path.join(PASTA_BASE, f"results_{nome_dataset}", "figures")
     os.makedirs(pasta_figuras, exist_ok=True)
 
     # Separa 25% dos dados para avaliacao final mantendo a proporcao original das classes
@@ -196,7 +199,7 @@ def executar_pipeline_kdd(
     )
     print(df_formatado[["Taxa", "Modelo", "Acurácia", "F1_Macro"]].to_string(index=False))
 
-    # Grafico 1: compara a distribuicao das tres variaveis mais discriminativas entre as classes
+    # Grafico 1: compara a distribuicao de tres variaveis discriminativas escolhidas (top_3_features) entre as classes
     df_box = pd.DataFrame(X, columns=nomes_features)[top_3_features].copy()
     df_box["Classe"] = [nomes_classes[idx] for idx in y]
 
@@ -219,7 +222,7 @@ def executar_pipeline_kdd(
         ax.grid(axis="y", linestyle="--", alpha=0.4)
 
     fig.suptitle(
-        f"{nome_dataset} - Distribuição dos 3 Atributos Mais Discriminativos",
+        f"{nome_dataset} - Distribuição de 3 Atributos Discriminativos",
         fontsize=15,
         fontweight="bold",
         y=1.02,
@@ -421,7 +424,7 @@ if __name__ == "__main__":
         top_3_features=["mean radius", "mean concave points", "mean perimeter"],
     )
 
-    pasta_metricas = os.path.join("results_breast_cancer", "metrics")
+    pasta_metricas = os.path.join(PASTA_BASE, "results_breast_cancer", "metrics")
     os.makedirs(pasta_metricas, exist_ok=True)
     df_cluster.to_csv(
         os.path.join(pasta_metricas, "Breast_Cancer_clustering.csv"), index=False

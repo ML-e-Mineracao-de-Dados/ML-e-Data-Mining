@@ -1,0 +1,3 @@
+Dataset,PC1 (%),PC2 (%),PC1+PC2 (%),Componentes p/ 80%,Componentes p/ 90%,Componentes p/ 95%,Componentes p/ 99%,Dimensão original
+Breast Cancer Wisconsin,43.89538801739399,19.51894547841269,63.41433349580669,5,7,10,17,30
+Wine,35.74992453956307,19.209250901858578,54.95917544142165,5,8,10,12,13

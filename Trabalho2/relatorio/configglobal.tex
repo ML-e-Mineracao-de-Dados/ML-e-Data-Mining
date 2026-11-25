@@ -1,0 +1,86 @@
+% Teoremas
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}
+\newtheorem{lemma}{Lema}
+\providecommand*{\lemmaautorefname}{Lema}
+\newtheorem{proposition}{Proposição}
+\providecommand*{\propositionautorefname}{Proposição}
+\newtheorem{corollary}{Corolário}
+\providecommand*{\corollaryautorefname}{Corolário}
+\newtheorem{conjecture}{Conjectura}
+\providecommand*{\conjectureautorefname}{Conjectura}
+\newtheorem{definition}{Definição}
+\providecommand*{\definitionautorefname}{Definição}
+\newtheorem{notation}{Notação}
+\providecommand*{\notationautorefname}{Notação}
+\newtheorem{remark}{Observação}
+\providecommand*{\remarkautorefname}{Observação}
+\newtheorem{example}{Exemplo}
+\providecommand*{\exampleautorefname}{Exemplo}
+\newtheorem{note}{Nota}
+\providecommand*{\noteautorefname}{Nota}
+
+% Listings
+\lstset{
+  language=C++,
+  basicstyle=\ttfamily,
+  keywordstyle=\color{blue},
+  stringstyle=\color{verde},
+  commentstyle=\color{red},
+  extendedchars=true,
+  showspaces=false,
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny,
+  breaklines=true,
+  backgroundcolor=\color{green!10},
+  breakautoindent=true,
+  fontadjust=false
+}
+
+% Cores e informações do PDF
+\definecolor{blue}{RGB}{41,5,195}
+\definecolor{verde}{rgb}{0,0.5,0}
+\makeatletter
+\hypersetup{
+  pdftitle={\@title},
+  pdfauthor={\@author},
+  pdfcreator={LaTeX with unesp-abnTeX2},
+  pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico},
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  filecolor=magenta,
+  urlcolor=blue,
+  bookmarksdepth=4
+}
+\makeatother
+
+% Comandos globais
+\everymath{\displaystyle}
+\renewcommand{\sin}{\mathrm{sen}}
+\renewcommand{\tan}{\mathrm{tg}}
+\renewcommand{\csc}{\mathrm{cossec}}
+\renewcommand{\cot}{\mathrm{cotg}}
+\DeclareMathOperator{\posto}{\mathrm{posto}}
+\DeclareMathOperator{\conv}{\mathrm{conv}}
+\DeclareMathOperator{\diag}{\mathrm{diag}}
+\DeclareMathOperator{\argmin}{\mathrm{arg}\min}
+\DeclareMathOperator{\argmax}{\mathrm{arg}\max}
+
+% Parágrafos
+\setlength{\parindent}{2.0cm}
+\setlength{\parskip}{0.2cm}
+
+% Subfiguras
+\newsubfloat{figure}
+\providecommand*{\subfigureautorefname}{Subfigura}
+
+% Atalhos
+\newcommand{\FX}{\mathcal{F}(X)}
+\newcommand{\F}{\ensuremath{\mathcal{F}}}
+\newcommand{\R}{\ensuremath{\mathds{R}}}
+\newcommand{\Aa}{[A]^{\alpha}}
+
+% Citação em sobrescrito
+\newcommand{\citep}[1]{\textsuperscript{\cite{#1}}}

@@ -221,3 +221,38 @@ __marimo__/
 
 #Custom
 /Material da Disciplina
+
+# LaTeX - arquivos auxiliares de compilação
+*.aux
+*.bbl
+*.blg
+*.toc
+*.lof
+*.lot
+*.loa
+*.lol
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.synctex
+*.xwm
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
+*.idx
+*.ilg
+*.ind
+*.glo
+*.gls
+*.glg
+*.ist
+*.acn
+*.acr
+*.alg
+*.xdy
+*.brf
+*.dvi

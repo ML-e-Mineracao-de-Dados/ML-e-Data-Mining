@@ -1,0 +1,10 @@
+\begin{resumo}[RESUMO]
+
+Este relatório descreve a aplicação das sete etapas do processo de descoberta de conhecimento em bases de dados (\textit{Knowledge Discovery in Databases}, KDD) a dois conjuntos de dados com atributos contínuos e rótulos discretos: o \textit{Breast Cancer Wisconsin (Diagnostic)}, com 569 amostras, 30 atributos e duas classes (maligno e benigno), e o \textit{Wine}, com 178 amostras, 13 atributos e três classes (cultivares). Após a verificação da qualidade dos dados, a análise de \textit{outliers}, a padronização e a redução de dimensionalidade por Análise de Componentes Principais (PCA), foram aplicados algoritmos de agrupamento (K-Médias e DBSCAN), tratados como o caso-limite em que nenhum ponto é rotulado, e algoritmos de classificação semi-supervisionada (\textit{Self-Training} com Regressão Logística, \textit{Label Spreading} e \textit{Label Propagation}), variando a taxa de pontos rotulados de 5\% a 70\% e usando o KNN e a Regressão Logística como \textit{baselines}. No Wine, o \textit{Self-Training} atingiu F1-macro de 0,980 com apenas 5\% dos rótulos (7 amostras), superando a Regressão Logística de forma estatisticamente significativa (teste de Wilcoxon, $p = 0{,}008$). No Breast Cancer, cuja fronteira entre as classes é essencialmente linear, os métodos semi-supervisionados não apresentaram vantagem estatisticamente sustentada sobre a Regressão Logística treinada apenas com os pontos rotulados. Os resultados indicam que o benefício dos dados não rotulados depende da estrutura de agrupamento das classes, e que essa estrutura pode ser diagnosticada previamente pelo desempenho do K-Médias.
+
+\vspace{\onelineskip}
+
+\noindent
+\textbf{Palavras-chave}: Mineração de dados. KDD. Aprendizado semi-supervisionado. Agrupamento. Breast Cancer Wisconsin. Wine.
+
+\end{resumo}

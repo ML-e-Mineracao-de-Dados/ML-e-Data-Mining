@@ -111,10 +111,11 @@ def executar_pipeline_kdd(
     n_repeticoes=10,
     taxa_matriz=0.05,
 ):
-    # Prepara diretorios de saida relativos a localizacao do script no projeto
+    # Prepara diretorios de saida relativos a localizacao do script no projeto (ex.: results_wine/)
     pasta_base = Path(__file__).resolve().parent
-    pasta_figuras = pasta_base / "results" / "figures"
-    pasta_metricas = pasta_base / "results" / "metrics"
+    pasta_resultados = pasta_base / f"results_{nome_dataset.lower()}"
+    pasta_figuras = pasta_resultados / "figures"
+    pasta_metricas = pasta_resultados / "metrics"
     pasta_figuras.mkdir(parents=True, exist_ok=True)
     pasta_metricas.mkdir(parents=True, exist_ok=True)
 
@@ -146,9 +147,11 @@ def executar_pipeline_kdd(
     pct_ruido_dbscan = np.mean(clusters_dbscan == -1) * 100.0
 
     # Calcula metricas externas e internas dos algoritmos de agrupamento
+    # A silhueta do DBSCAN ignora os pontos de ruido (-1), que nao formam um cluster
+    mascara_sem_ruido = clusters_dbscan != -1
     sil_dbscan = (
-        silhouette_score(X_treino_sc, clusters_dbscan)
-        if len(set(clusters_dbscan)) > 1
+        silhouette_score(X_treino_sc[mascara_sem_ruido], clusters_dbscan[mascara_sem_ruido])
+        if len(set(clusters_dbscan[mascara_sem_ruido])) > 1
         else np.nan
     )
     df_clustering = pd.DataFrame([
@@ -351,8 +354,23 @@ def executar_pipeline_kdd(
         ax.set_xlabel("Percentual de Amostras Rotuladas no Treino (%)")
         ax.set_ylabel("Pontuacao")
         ax.set_xticks([t * 100.0 for t in taxas_rotulados])
-        ax.set_ylim(0.65, 1.03)
+        y_min_eixo = 0.65
+        ax.set_ylim(y_min_eixo, 1.03)
         ax.legend(fontsize=9.5, loc="lower right")
+
+        # Informa os pontos que ficam abaixo do limite do eixo, para que nenhum resultado fique oculto
+        fora_escala = df_resumo[df_resumo[col_metrica] < y_min_eixo].sort_values(["Modelo", "Taxa_Rotulados"])
+        if len(fora_escala):
+            linhas_aviso = [
+                f"{r['Modelo']} {int(round(r['Taxa_Rotulados'] * 100))}%: {r[col_metrica]:.3f}"
+                for _, r in fora_escala.iterrows()
+            ]
+            ax.text(
+                0.30, 0.22,
+                f"Abaixo da escala (< {y_min_eixo}):\n" + "\n".join(linhas_aviso),
+                transform=ax.transAxes, fontsize=9.5, va="top", ha="left",
+                bbox={"boxstyle": "round", "facecolor": "white", "edgecolor": "#c44e52", "alpha": 0.9},
+            )
 
     fig.suptitle(
         f"{nome_dataset} - Desempenho Supervisionado vs. Semi-Supervisionado (0.05 a 0.70)",

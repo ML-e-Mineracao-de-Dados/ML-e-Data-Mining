@@ -1,0 +1,17 @@
+Dataset,Escalonamento,Modelo,F1_medio,F1_dp
+Breast Cancer Wisconsin,Sem padronização,KNN (k=5),0.9341110580715881,0.010053778082690822
+Breast Cancer Wisconsin,Sem padronização,Regressão Logística,0.941594346547654,0.017546086603215914
+Breast Cancer Wisconsin,StandardScaler,KNN (k=5),0.9642171538333526,0.0154192288184441
+Breast Cancer Wisconsin,StandardScaler,Regressão Logística,0.9772689482939709,0.00944537246834584
+Breast Cancer Wisconsin,MinMaxScaler,KNN (k=5),0.9668932043060131,0.010515904822427893
+Breast Cancer Wisconsin,MinMaxScaler,Regressão Logística,0.96915201962493,0.024092643497637498
+Breast Cancer Wisconsin,RobustScaler,KNN (k=5),0.959007702675396,0.015412911804162256
+Breast Cancer Wisconsin,RobustScaler,Regressão Logística,0.9747790368676945,0.00797556830562014
+Wine,Sem padronização,KNN (k=5),0.6317297425656558,0.07453538009878656
+Wine,Sem padronização,Regressão Logística,0.971345029239766,0.042023963095255426
+Wine,StandardScaler,KNN (k=5),0.9563352826510721,0.041724689716297655
+Wine,StandardScaler,Regressão Logística,0.9777443609022557,0.01820480715840188
+Wine,MinMaxScaler,KNN (k=5),0.9704093567251462,0.027488117320466687
+Wine,MinMaxScaler,Regressão Logística,0.9853801169590642,0.029239766081871333
+Wine,RobustScaler,KNN (k=5),0.9422445001392369,0.03739883132104819
+Wine,RobustScaler,Regressão Logística,0.9853634085213032,0.017951301682686247

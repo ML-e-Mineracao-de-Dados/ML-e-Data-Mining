@@ -1,0 +1,81 @@
+\chapter[Fundamentação Teórica]{FUNDAMENTAÇÃO TEÓRICA}
+
+\section{O PROCESSO KDD}
+
+O processo de descoberta de conhecimento adotado neste trabalho é dividido em sete etapas \citep{fayyad1996kdd, azevedo2008kdd}:
+
+\begin{enumerate}
+    \item \textbf{Compreensão do problema} e dos objetivos, com a formulação de hipóteses sobre o objeto de estudo;
+    \item \textbf{Seleção} de um conjunto de dados relevante;
+    \item \textbf{Pré-processamento}, que envolve limpeza, remoção de ruídos e normalização;
+    \item \textbf{Transformação} dos dados para uma representação mais adequada, como na redução de dimensionalidade;
+    \item \textbf{Mineração de dados}, isto é, a aplicação dos modelos de reconhecimento de padrões;
+    \item \textbf{Avaliação e interpretação} dos resultados, que pode levar à revisão das hipóteses da Etapa 1;
+    \item \textbf{Pós-processamento}, que depende dos objetivos e pode ser a redação de um artigo ou a implantação de um sistema.
+\end{enumerate}
+
+O processo não é necessariamente linear: a mineração pode contradizer as hipóteses iniciais e exigir que elas sejam repensadas. Além disso, os dados são compreendidos por meio dos modelos, de modo que a compreensão dos modelos é essencial para a compreensão dos dados.
+
+\section{APRENDIZADO SEMI-SUPERVISIONADO}
+
+No aprendizado semi-supervisionado, o conjunto de treino contém um pequeno subconjunto de pontos rotulados e um conjunto, em geral maior, de pontos não rotulados. A premissa central é a \textbf{hipótese de \textit{cluster}}: pontos próximos, ou ligados por regiões de alta densidade, tendem a compartilhar a mesma classe. Quando essa hipótese vale, os pontos não rotulados revelam a forma das classes e ajudam a posicionar a fronteira de decisão.
+
+\subsection{SELF-TRAINING}
+
+O \textit{Self-Training} \citep{yarowsky1995unsupervised} é um método envoltório (\textit{wrapper}): um classificador base é treinado com os pontos rotulados e, a cada iteração, os pontos não rotulados cuja probabilidade predita supera um limiar de confiança recebem um \textbf{pseudo-rótulo} e são incorporados ao treino. O processo se repete até que nenhum novo ponto atinja o limiar. Neste trabalho, o classificador base é a Regressão Logística.
+
+\subsection{LABEL PROPAGATION E LABEL SPREADING}
+
+Os métodos baseados em grafos constroem um grafo de similaridade entre todos os pontos, rotulados ou não, e propagam os rótulos pelas arestas. Os pesos são definidos por um núcleo RBF, $w_{ij} = \exp(-\gamma \lVert \mathbf{x}_i - \mathbf{x}_j \rVert^2)$, ou por um grafo de $k$ vizinhos mais próximos. No \textit{Label Propagation} \citep{zhu2002learning}, os rótulos conhecidos são mantidos fixos durante a propagação. No \textit{Label Spreading} \citep{zhou2004learning}, a matriz de afinidade é normalizada, $\mathbf{S} = \mathbf{D}^{-1/2}\mathbf{W}\mathbf{D}^{-1/2}$, e a distribuição de rótulos $\mathbf{F}$ é atualizada por
+
+\begin{equation}
+\mathbf{F}^{(t+1)} = \alpha\,\mathbf{S}\,\mathbf{F}^{(t)} + (1-\alpha)\,\mathbf{Y},
+\label{eq:label_spreading}
+\end{equation}
+
+\noindent em que $\mathbf{Y}$ contém os rótulos iniciais e $\alpha \in (0,1)$ controla quanto da informação original pode ser alterada. Esse coeficiente de suavização torna o \textit{Label Spreading} mais robusto a ruído do que o \textit{Label Propagation}.
+
+\section{CLASSIFICADORES DE REFERÊNCIA (\textit{BASELINES})}
+
+O \textbf{KNN} classifica um novo ponto pela classe majoritária entre os seus $k$ vizinhos mais próximos no conjunto de treino. Como depende diretamente de distâncias, é sensível à escala dos atributos.
+
+A \textbf{Regressão Logística} é um modelo linear que estende a ideia da regressão linear \citep{codifike_regressao} para problemas de classificação, modelando a probabilidade de cada classe. No caso binário,
+
+\begin{equation}
+P(y = 1 \mid \mathbf{x}) = \frac{1}{1 + e^{-(\mathbf{w}^\top \mathbf{x} + b)}},
+\label{eq:logistica}
+\end{equation}
+
+\noindent e, no caso multiclasse, a função logística é substituída pela função \textit{softmax}. A fronteira de decisão é um hiperplano no espaço dos atributos. Os dois \textit{baselines} são treinados \textbf{apenas} com os pontos rotulados.
+
+\section{AGRUPAMENTO}
+
+O \textbf{K-Médias} \citep{lloyd1982least} particiona os dados em $k$ grupos minimizando a soma dos quadrados das distâncias de cada ponto ao centróide do seu grupo (inércia):
+
+\begin{equation}
+J = \sum_{j=1}^{k} \sum_{\mathbf{x}_i \in C_j} \lVert \mathbf{x}_i - \boldsymbol{\mu}_j \rVert^2.
+\label{eq:kmeans}
+\end{equation}
+
+\noindent O método favorece grupos aproximadamente convexos e de tamanhos semelhantes.
+
+O \textbf{DBSCAN} \citep{ester1996density} define grupos como regiões de alta densidade: um ponto é \textit{central} se possui pelo menos \texttt{min\_samples} vizinhos a uma distância de até \texttt{eps}. Grupos são formados por pontos centrais conectados, e pontos que não pertencem a nenhum grupo são marcados como \textbf{ruído}. Diferentemente do K-Médias, o DBSCAN não exige o número de grupos, mas depende de existirem regiões de baixa densidade separando as classes.
+
+\section{REDUÇÃO DE DIMENSIONALIDADE}
+
+A \textbf{Análise de Componentes Principais} (PCA) \citep{jolliffe2002principal} projeta os dados em novos eixos ortogonais, as componentes principais, ordenados pela variância explicada. Com atributos padronizados, o PCA equivale à decomposição da matriz de correlação. Os \textbf{\textit{Laplacian Eigenmaps}} \citep{belkin2003laplacian} constroem um grafo de vizinhança e buscam uma representação de baixa dimensão que preserve a vizinhança local. Trata-se da mesma estrutura de grafo explorada pelos métodos semi-supervisionados da seção anterior.
+
+\section{MÉTRICAS DE AVALIAÇÃO}
+
+Para a classificação, foram usadas a \textbf{acurácia} e o \textbf{F1-macro}, que é a média simples do F1 de cada classe e, por isso, não favorece a classe majoritária:
+
+\begin{equation}
+F1_c = \frac{2\,P_c\,R_c}{P_c + R_c}, \qquad F1_{\text{macro}} = \frac{1}{C}\sum_{c=1}^{C} F1_c,
+\label{eq:f1}
+\end{equation}
+
+\noindent em que $P_c$ e $R_c$ são a precisão e a revocação da classe $c$, e $C$ é o número de classes.
+
+Para o agrupamento, foram usadas métricas \textbf{externas}, que comparam a partição com as classes reais: o \textbf{ARI} (\textit{Adjusted Rand Index}) \citep{hubert1985comparing}, que vale aproximadamente 0 para partições aleatórias e 1 para concordância perfeita, e as medidas de informação mútua normalizada e ajustada (NMI e AMI). Também foi usada a \textbf{silhueta} \citep{rousseeuw1987silhouettes}, métrica \textbf{interna}, que não utiliza rótulos e mede quão compactos e separados estão os grupos, variando de $-1$ a $1$.
+
+Por fim, para comparar métodos avaliados sobre as mesmas repetições, foi usado o \textbf{teste de postos sinalizados de Wilcoxon} \citep{wilcoxon1945individual}, um teste não paramétrico pareado.
