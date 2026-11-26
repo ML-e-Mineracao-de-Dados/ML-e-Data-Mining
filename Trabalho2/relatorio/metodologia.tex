@@ -42,9 +42,72 @@ H6 & Duas componentes principais preservam a maior parte da separabilidade das c
 
 Os dois conjuntos foram carregados a partir do \texttt{scikit-learn}, que disponibiliza cópias dos arquivos do repositório UCI \citep{wolberg1995breast, aeberhard1991wine}. Ambos atendem à proposta: possuem atributos contínuos e rótulo discreto. Como são pequenos, foram usados integralmente, sem amostragem.
 
-\textbf{Breast Cancer Wisconsin (Diagnostic).} Cada amostra corresponde a uma imagem digitalizada de uma punção aspirativa por agulha fina (PAAF) de um nódulo mamário \citep{street1993nuclear}. Os 30 atributos descrevem os núcleos celulares: 10 medidas (raio, textura, perímetro, área, suavidade, compacidade, concavidade, pontos côncavos, simetria e dimensão fractal), cada uma resumida em três versões, a \textit{média}, o \textit{erro padrão} e o \textit{pior valor} (média dos três maiores). O rótulo é o diagnóstico.
+\textbf{Breast Cancer Wisconsin (Diagnostic).} Cada amostra corresponde a uma imagem digitalizada de uma punção aspirativa por agulha fina (PAAF) de um nódulo mamário \citep{street1993nuclear}. Os 30 atributos descrevem os núcleos celulares: 10 medidas (raio, textura, perímetro, área, suavidade, compacidade, concavidade, pontos côncavos, simetria e dimensão fractal), cada uma resumida em três versões, a \textit{média} (\texttt{mean}), o \textit{erro padrão} (\texttt{error}) e o \textit{pior valor} (\texttt{worst}, média dos três maiores). O rótulo é o diagnóstico. A Tabela \ref{tab:dicionario_bc} apresenta o dicionário de variáveis.
 
-\textbf{Wine.} Resultado da análise química de vinhos produzidos na mesma região da Itália (Piemonte) a partir de três cultivares de uva (Barolo, Grignolino e Barbera). Os 13 atributos são álcool, ácido málico, cinzas, alcalinidade das cinzas, magnésio, fenóis totais, flavonoides, fenóis não flavonoides, proantocianidinas, intensidade de cor, matiz, OD280/OD315 dos vinhos diluídos e prolina. O rótulo é a cultivar.
+\textbf{Wine.} Resultado da análise química de vinhos produzidos na mesma região da Itália (Piemonte) a partir de três cultivares de uva: Nebbiolo (a uva do vinho Barolo), Grignolino e Barbera. Os 13 atributos são álcool, ácido málico, cinzas, alcalinidade das cinzas, magnésio, fenóis totais, flavonoides, fenóis não flavonoides, proantocianidinas, intensidade de cor, matiz, OD280/OD315 dos vinhos diluídos e prolina, descritos na Tabela \ref{tab:dicionario_wine}. O rótulo é a cultivar.
+
+\begin{table}[htbp]
+\centering
+\caption{Dicionário de variáveis do Breast Cancer Wisconsin. Cada medida aparece nas versões \texttt{mean}, \texttt{error} e \texttt{worst}, totalizando 30 atributos.}
+\label{tab:dicionario_bc}
+\footnotesize
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.4cm} >{\raggedright\arraybackslash}p{11.0cm}}
+\toprule
+\textbf{Medida} & \textbf{Descrição} \\
+\midrule
+\multicolumn{2}{l}{\textit{Tamanho do núcleo}} \\
+\texttt{radius} & Raio: média das distâncias do centro aos pontos do contorno do núcleo \\
+\texttt{perimeter} & Perímetro do contorno do núcleo \\
+\texttt{area} & Área ocupada pelo núcleo \\
+\addlinespace
+\multicolumn{2}{l}{\textit{Textura}} \\
+\texttt{texture} & Desvio padrão dos tons de cinza da imagem \\
+\texttt{smoothness} & Suavidade: variação local dos comprimentos dos raios \\
+\addlinespace
+\multicolumn{2}{l}{\textit{Forma do contorno}} \\
+\texttt{compactness} & Compacidade: $\text{perímetro}^2 / \text{área} - 1$ \\
+\texttt{concavity} & Concavidade: severidade (profundidade) das porções côncavas do contorno \\
+\texttt{concave points} & Pontos côncavos: número de porções côncavas do contorno \\
+\texttt{symmetry} & Simetria do núcleo \\
+\texttt{fractal dimension} & Dimensão fractal: complexidade da borda (``aproximação da linha costeira'' $-$ 1) \\
+\midrule
+\texttt{target} (rótulo) & Diagnóstico: 0 = maligno (212 amostras), 1 = benigno (357 amostras) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Dicionário de variáveis do Wine.}
+\label{tab:dicionario_wine}
+\footnotesize
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}p{9.6cm}}
+\toprule
+\textbf{Atributo} & \textbf{Descrição} \\
+\midrule
+\multicolumn{2}{l}{\textit{Composição química e minerais}} \\
+\texttt{alcohol} & Teor alcoólico \\
+\texttt{malic\_acid} & Concentração de ácido málico \\
+\texttt{ash} & Teor de cinzas (resíduo mineral) \\
+\texttt{alcalinity\_of\_ash} & Alcalinidade das cinzas \\
+\texttt{magnesium} & Concentração de magnésio \\
+\addlinespace
+\multicolumn{2}{l}{\textit{Compostos fenólicos}} \\
+\texttt{total\_phenols} & Teor total de fenóis \\
+\texttt{flavanoids} & Concentração de flavonoides \\
+\texttt{nonflavanoid\_phenols} & Concentração de fenóis não flavonoides \\
+\texttt{proanthocyanins} & Teor de proantocianidinas (taninos) \\
+\addlinespace
+\multicolumn{2}{l}{\textit{Cor, diluição e aminoácidos}} \\
+\texttt{color\_intensity} & Intensidade da cor \\
+\texttt{hue} & Matiz (tonalidade) da cor \\
+\texttt{od280/\allowbreak od315\_of\_diluted\_wines} & Razão entre as absorbâncias ópticas a 280 nm e a 315 nm dos vinhos diluídos \\
+\texttt{proline} & Concentração do aminoácido prolina \\
+\midrule
+\texttt{target} (rótulo) & Cultivar: \texttt{class\_0} (59 amostras), \texttt{class\_1} (71) e \texttt{class\_2} (48) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 A Tabela \ref{tab:datasets} resume as principais características dos dois conjuntos, e a Figura \ref{fig:distribuicao_classes} apresenta a distribuição das classes.
 
@@ -186,7 +249,7 @@ Para medir quanto da separabilidade das classes cada representação preserva, f
 
 O agrupamento foi aplicado ao treino padronizado \textbf{sem nenhum rótulo}. Os rótulos verdadeiros foram usados somente para avaliar os agrupamentos.
 
-Na classificação semi-supervisionada, para cada taxa e repetição, uma fração estratificada dos pontos de treino manteve o rótulo e os demais foram marcados como não rotulados. Em cada repetição, todos os modelos receberam \textbf{o mesmo} subconjunto rotulado, o que permite comparações pareadas. Os \textit{baselines} foram treinados apenas com os pontos rotulados, enquanto os semi-supervisionados usaram também os não rotulados. A avaliação principal foi feita no conjunto de teste isolado. Os dois \textit{scripts} adotaram protocolos ligeiramente diferentes, resumidos na Tabela \ref{tab:protocolo}.
+Na classificação semi-supervisionada, para cada taxa e repetição, uma fração estratificada dos pontos de treino manteve o rótulo e os demais foram marcados como não rotulados. Em cada repetição, todos os modelos receberam \textbf{o mesmo} subconjunto rotulado, o que permite comparações pareadas. Os \textit{baselines} foram treinados apenas com os pontos rotulados, enquanto os semi-supervisionados usaram também os não rotulados. A avaliação principal foi feita no conjunto de teste isolado. O sorteio estratificado evita que uma classe inteira fique sem nenhum ponto rotulado; no Wine, em que 5\% do treino correspondem a apenas 7 amostras, foi imposto ainda um mínimo de dois pontos rotulados por cultivar. Os dois \textit{scripts} adotaram protocolos ligeiramente diferentes, resumidos na Tabela \ref{tab:protocolo}.
 
 \begin{table}[htbp]
 \centering

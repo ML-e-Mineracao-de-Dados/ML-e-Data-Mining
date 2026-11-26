@@ -1,0 +1,50 @@
+\begin{apendicesenv}
+
+\chapter{ACURÁCIA NO CONJUNTO DE TESTE}
+\label{ap:acuracia}
+
+As Tabelas \ref{tab:acc_bc} e \ref{tab:acc_wine} complementam as Tabelas \ref{tab:f1_bc} e \ref{tab:f1_wine} com a acurácia no conjunto de teste, para as mesmas taxas de rótulos e repetições. Os valores foram exportados pelos \textit{scripts} \texttt{kdd\_breast\_cancer\_wisconsin.py} e \texttt{kdd\_wine.py}, e o maior valor de cada taxa está em negrito. A acurácia acompanha de perto o F1-macro e leva às mesmas conclusões, com uma exceção: no \textit{Label Propagation} com poucos rótulos, a acurácia (41,11\% a 5\%) fica bem acima do F1-macro (0,237), sinal de que os acertos se concentram em parte das classes.
+
+\begin{table}[htbp]
+\centering
+\caption{Breast Cancer Wisconsin: acurácia no teste, em \% (média $\pm$ desvio padrão em 5 repetições).}
+\label{tab:acc_bc}
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{ccccc}
+\toprule
+\textbf{Taxa} & \textbf{KNN} & \textbf{Reg. Logística} & \textbf{Label Spreading} & \textbf{Self-Training LR} \\
+\midrule
+0,05 & 91,61 $\pm$ 1,21 & 93,29 $\pm$ 1,36 & \textbf{94,13} $\pm$ 0,63 & 93,71 $\pm$ 1,78 \\
+0,10 & 93,15 $\pm$ 0,91 & \textbf{94,41} $\pm$ 1,11 & 93,15 $\pm$ 1,04 & 94,13 $\pm$ 1,45 \\
+0,20 & 94,69 $\pm$ 0,63 & 95,10 $\pm$ 0,99 & 94,27 $\pm$ 1,35 & \textbf{95,24} $\pm$ 0,59 \\
+0,30 & 94,97 $\pm$ 1,59 & \textbf{96,50} $\pm$ 1,11 & 94,83 $\pm$ 1,27 & 96,36 $\pm$ 0,77 \\
+0,40 & 95,52 $\pm$ 0,63 & \textbf{97,20} $\pm$ 0,86 & 96,22 $\pm$ 1,06 & 96,78 $\pm$ 1,06 \\
+0,50 & 95,94 $\pm$ 0,77 & 97,48 $\pm$ 1,06 & 95,66 $\pm$ 1,25 & \textbf{97,62} $\pm$ 0,80 \\
+0,60 & 96,08 $\pm$ 0,63 & \textbf{97,76} $\pm$ 0,59 & 95,94 $\pm$ 0,59 & \textbf{97,76} $\pm$ 0,91 \\
+0,70 & 96,64 $\pm$ 0,77 & \textbf{98,32} $\pm$ 0,38 & 96,50 $\pm$ 0,86 & \textbf{98,32} $\pm$ 0,38 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Wine: acurácia no teste, em \% (média $\pm$ desvio padrão em 10 repetições). Entre parênteses, o número de amostras rotuladas.}
+\label{tab:acc_wine}
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Taxa} & \textbf{KNN} & \textbf{\shortstack{Reg.\\Logística}} & \textbf{\shortstack{Label\\Spreading}} & \textbf{\shortstack{Label\\Propagation}} & \textbf{\shortstack{Self-Training\\LR}} \\
+\midrule
+0,05 (7) & 86,44 $\pm$ 8,47 & 92,89 $\pm$ 3,89 & 88,00 $\pm$ 6,13 & 41,11 $\pm$ 5,67 & \textbf{98,00} $\pm$ 1,26 \\
+0,10 (13) & 90,44 $\pm$ 4,20 & 93,56 $\pm$ 3,54 & 93,11 $\pm$ 4,38 & 71,33 $\pm$ 17,10 & \textbf{98,22} $\pm$ 1,75 \\
+0,20 (27) & 93,78 $\pm$ 2,73 & 97,11 $\pm$ 1,50 & 93,78 $\pm$ 4,03 & 87,56 $\pm$ 7,04 & \textbf{98,44} $\pm$ 1,07 \\
+0,30 (40) & 97,56 $\pm$ 1,26 & 96,89 $\pm$ 2,81 & 95,78 $\pm$ 1,95 & 93,33 $\pm$ 1,81 & \textbf{98,22} $\pm$ 1,75 \\
+0,50 (66) & 95,56 $\pm$ 1,81 & 97,33 $\pm$ 2,30 & 94,67 $\pm$ 3,18 & 93,11 $\pm$ 3,05 & \textbf{98,67} $\pm$ 1,55 \\
+0,70 (93) & 95,56 $\pm$ 1,81 & 98,67 $\pm$ 1,15 & 97,56 $\pm$ 2,66 & 97,11 $\pm$ 2,97 & \textbf{99,11} $\pm$ 1,15 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{apendicesenv}
